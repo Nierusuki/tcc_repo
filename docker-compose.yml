@@ -1,0 +1,15 @@
+services:
+  tcc_database:
+    image: postgres
+    environment:
+      POSTGRES_USER: tcc_master
+      POSTGRES_DB: commerce_rest 
+      POSTGRES_PASSWORD: superuser
+    ports:
+      - "5432:5432"
+    volumes:
+      - db1:/var/lib/postgresql/data
+      - ./dbinit/create_second_db.sql:/docker-entrypoint-initdb.d/create_second_db.sql
+      
+volumes: 
+  db1:
