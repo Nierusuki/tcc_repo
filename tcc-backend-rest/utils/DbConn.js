@@ -1,11 +1,16 @@
 const { Sequelize } = require('sequelize');
 
-const sqlize = new Sequelize('database', process.env.POSTGRES_USERNAME, process.env.POSTGRES_PASSWORD, {
+const sqlize = new Sequelize('commerce_rest', process.env.POSTGRES_USERNAME, process.env.POSTGRES_PASSWORD, {
     host:process.env.DB_HOST,
     port:process.env.DB_PORT,
     dialect:'postgres',
-    logging:'false'
-
+    logging: console.log
+    //postgres://tcc_master:superuser@tcc_database.tcc_network:5432/commerce_rest
 })
 
+sqlize.syncDB = async function() {
+    await sqlize.sync();
+}
+
 module.exports = sqlize;
+

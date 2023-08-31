@@ -10,6 +10,34 @@ services:
     volumes:
       - db1:/var/lib/postgresql/data
       - ./dbinit/create_second_db.sql:/docker-entrypoint-initdb.d/create_second_db.sql
-      
+    container_name: tcc_database
+    networks:
+      - tcc_network
+
+  tcc_backend_rest:
+    build:
+      dockerfile: REST_Dockerfile
+      context: .
+    image: gabriel/tcc_backend_rest
+    container_name: tcc_backend_rest
+    networks:
+      - tcc_network
+    environment:
+      POSTGRES_USERNAME: tcc_master
+      POSTGRES_PASSWORD: superuser
+      DB_HOST: tcc_database.tcc_network
+      DB_PORT: 5432
+      PORT: 3000
+    depends_on:
+      - tcc_database
+    ports:
+      - "3000:3000"
+
+
+networks:
+  tcc_network:
+    driver: bridge
+    name: 'tcc_network'
+
 volumes: 
   db1:

@@ -9,11 +9,6 @@ WORKDIR /usr/src/app
 COPY ./tcc-backend-rest .
 COPY --from=build /tmp/app/node_modules ./node_modules
 EXPOSE 3000
-ENV POSTGRES_USERNAME=superuser
-ENV POSTGRES_PASSWORD=superuser
-ENV DB_HOST=localhost
-ENV DB_PORT=5432
-ENV PORT=3000
 RUN chown -R node /usr/src/app
 USER node
 CMD ["npm", "start"]
