@@ -9,7 +9,9 @@ const sqlize = new Sequelize('commerce_rest', process.env.POSTGRES_USERNAME, pro
 })
 
 sqlize.syncDB = async function() {
-    await sqlize.sync();
+    //Set models and define associations
+    require('./createModels')
+    await sqlize.sync({alter:true})
 }
 
 module.exports = sqlize;
