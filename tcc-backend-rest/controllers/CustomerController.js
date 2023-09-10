@@ -26,7 +26,7 @@ const updateCustomer = ((req, res) => {
     const body = req.body
     var paramsEmail = req.params.email
     if (!paramsEmail) {
-        res.send("Missingparameter: email")
+        res.send("Missing parameter: email")
         res.status(400)
         return;
     }
