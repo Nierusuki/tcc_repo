@@ -1,6 +1,7 @@
 const express = require('express');
 const CustomerController = require('./controllers/CustomerController');
 const ProductController = require('./controllers/ProductController');
+const OrderController = require('./controllers/OrderController');
 const router = express.Router();
 
 
@@ -21,4 +22,10 @@ router.get('/product/:serial', ProductController.getProduct)
 router.put('/product/:serial', ProductController.updateProduct)
 router.post('/product', ProductController.createProduct)
 router.delete('/product/:serial', ProductController.deleteProduct)
+
+
+//Order routes
+router.post('/order', OrderController.placeOrder)
+router.get('/order/:protocol', OrderController.getOrder)
+router.delete('/order/:protocol', OrderController.cancelOrder)
 module.exports = router;
