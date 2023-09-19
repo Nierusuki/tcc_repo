@@ -7,7 +7,7 @@ const placeOrder = (async (req, res) => {
         if (!req.body.customerEmail) {
             throw "Missing field 'customerEmail' to place order"
         }
-        if (!req.body.products || !(Array.isArray(req.body.products))) {
+        if (!req.body.products || !((Array.isArray(req.body.products)) && req.body.products.length != 0)) {
             throw "Missing array field 'products' to place order"
         }
 
