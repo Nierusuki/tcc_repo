@@ -11,12 +11,17 @@ module.exports = gql`
         email: String!
         name: String!
         address: String!
+        error: String
     }
 
     input CustomerInput {
         email: String!
         name: String!
         address: String!
+    }
+    
+    input EmailInput {
+        email: String!
     }
 
     extend type Query {
@@ -25,8 +30,11 @@ module.exports = gql`
     }
 
 
+
     extend type Mutation {
         createCustomer(input: CustomerInput!): CustomerResponse
+        deleteCustomer(input: EmailInput!): CustomerResponse
+        updateCustomer(input: CustomerInput!): CustomerResponse
     }
 
 `

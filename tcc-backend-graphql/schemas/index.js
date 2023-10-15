@@ -1,5 +1,6 @@
 const { gql } = require('apollo-server-express');
 const customerType = require('./customer')
+const productType = require('./product')
 
 const rootType = gql`
  type Query {
@@ -11,4 +12,4 @@ const rootType = gql`
 
 `;
 
-module.exports = [rootType, customerType];
+module.exports = [rootType, customerType, productType];
