@@ -4,7 +4,7 @@ const sqlize = new Sequelize('commerce_graphql', process.env.POSTGRES_USERNAME, 
     host:process.env.DB_HOST,
     port:process.env.DB_PORT,
     dialect:'postgres',
-    logging: false
+    logging: console.log
     //postgres://tcc_master:superuser@tcc_database.tcc_network:5432/commerce_rest
 })
 

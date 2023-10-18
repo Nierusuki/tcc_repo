@@ -1,12 +1,12 @@
 FROM node:lts-alpine as build
 RUN mkdir /tmp/app
 WORKDIR /tmp/app
-COPY ["./tcc-backend-rest/package.json", "./tcc-backend-rest/package-lock.json","./"]
+COPY ["./tcc-backend-graphql/package.json", "./tcc-backend-graphql/package-lock.json","./"]
 RUN npm install
 
 FROM node:lts-alpine
 WORKDIR /usr/src/app
-COPY ./tcc-backend-rest .
+COPY ./tcc-backend-graphql .
 COPY --from=build /tmp/app/node_modules ./node_modules
 EXPOSE 3000
 RUN chown -R node /usr/src/app
