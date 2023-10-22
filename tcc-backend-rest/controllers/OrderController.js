@@ -21,7 +21,7 @@ const placeOrder = (async (req, res) => {
             status:req.body.status,
             orderDate:req.body.orderDate,
             itemAmount:statusProducts.itemCount,
-            total:req.body.total,
+            total:statusProducts.total,
             CustomerEmail:req.body.customerEmail
         })
 
@@ -39,8 +39,10 @@ const placeOrder = (async (req, res) => {
 
 async function validateProducts(products) {
     let itemAmount = 0;
+    let total = 0;
     for (const product of products) {
         let foundProduct = await Product.findByPk(product.serial);
+        console.log(foundProduct)
         if (!foundProduct) {
             return {
                 status:"notOk",
@@ -54,10 +56,12 @@ async function validateProducts(products) {
             }
         }
         else {
+            total += parseFloat(foundProduct.dataValues.value) * product.quantity
             itemAmount += product.quantity;
         }
     }
-    return {status:"ok", itemCount:itemAmount}
+    console.log(total);
+    return {status:"ok", itemCount:itemAmount, total:total}
 }
 
 const getOrder = (async (req, res) => {
